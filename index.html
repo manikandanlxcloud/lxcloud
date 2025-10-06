@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messi Mani | Linux & Cloud Admin</title>
+  <style>
+    :root {
+      --primary: #ff9800;
+      --secondary: #1a1a1a;
+      --light-bg: #e0f7fa;
+      --card-bg: #ffffff;
+      --text: #333333;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: var(--light-bg);
+      color: var(--text);
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1537432376769-00a243e07d79?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+
+    header h1 { 
+      font-size: 3rem; 
+      margin: 0 0 10px 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    header p { 
+      font-size: 1.3rem; 
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      margin-top: 20px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--secondary);
+      text-align: center;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    nav a:hover { 
+      color: var(--primary); 
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    section h2 { 
+      margin-top: 0; 
+      color: var(--secondary); 
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    /* Skills */
+    .skills ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .skills li {
+      background: #f5f5f5;
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 4px 4px 0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .skills li:hover {
+      transform: translateX(5px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Technologies */
+    .tech-category {
+      margin-bottom: 40px;
+    }
+    
+    .tech-category h3 {
+      color: var(--secondary);
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .tech-category p {
+      margin-top: -10px;
+      margin-bottom: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .tech-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 25px;
+    }
+
+    .tech-item {
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .tech-img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 10px;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .tech-img:hover { 
+      transform: scale(1.1); 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+
+    .tech-item p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: var(--secondary);
+    }
+
+    /* Contact Section */
+    #contact p {
+      margin: 10px 0;
+    }
+
+    .contact-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+      color: #e68900;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background: var(--secondary);
+      color: #fff;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    footer a { 
+      color: var(--primary); 
+      text-decoration: none; 
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1.1rem; }
+      .profile-img { width: 120px; height: 120px; }
+      .tech-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 15px;
+      }
+      .tech-img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 40px 15px; }
+      header h1 { font-size: 1.8rem; }
+      nav a { display: inline-block; margin: 5px; }
+      section { padding: 25px 15px; }
+      .tech-container {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+      }
+      .tech-img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Messi Mani</h1>
+    <p>Freelance Linux & Cloud Admin Engineer</p>
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Messi Mani" class="profile-img">
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#technologies">Technologies</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a freelance Linux and Cloud Administrator with strong expertise in
+      server administration, virtualization, cloud platforms, DevOps, and
+      automation. I help businesses deploy, secure, and scale their infrastructure.
+    </p>
+    <p>
+      With over 8 years of experience in IT infrastructure, I specialize in creating
+      robust, scalable, and secure solutions tailored to each client's unique needs.
+      My approach combines technical excellence with a focus on business outcomes.
+    </p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>Linux Server Administration (Ubuntu, CentOS, RHEL)</li>
+      <li>Cloud Platforms (AWS, Azure, Oracle Cloud)</li>
+      <li>Virtualization (VMware ESXi, Proxmox, KVM)</li>
+      <li>Automation (Ansible, Jenkins, Docker, Kubernetes)</li>
+      <li>Web Hosting & Security (Apache, Nginx, SSL, Firewall)</li>
+      <li>Database Management (MySQL, MariaDB, PostgreSQL)</li>
+      <li>Monitoring & Logging (Prometheus, Grafana, ELK Stack)</li>
+      <li>Scripting (Bash, Python, PowerShell)</li>
+      <li>ERP Systems (Odoo)</li>
+      <li>Web Development (PHP, Node.js, React)</li>
+      <li>Network Security (Fortigate Firewalls)</li>
+    </ul>
+  </section>
+
+  <!-- Technologies Section -->
+  <section id="technologies">
+    <h2>Technologies I Work With</h2>
+    
+    <!-- Operating Systems -->
+    <div class="tech-category">
+      <h3>Operating Systems</h3>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.linuxfoundation.org/wp-content/uploads/2019/02/logo-linux-foundation-header.png" alt="Linux" class="tech-img">
+          <p>Linux</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.redhat.com/cms/managed-files/Logo-RedHat-Hat-Color-CMYK%20190%20x%2060.png" alt="RHEL" class="tech-img">
+          <p>RHEL</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://assets.ubuntu.com/v1/29985a98-ubuntu-logo32.png" alt="Ubuntu" class="tech-img">
+          <p>Ubuntu</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31" alt="Windows" class="tech-img">
+          <p>Windows</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202210130251" alt="macOS" class="tech-img">
+          <p>macOS</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Virtualization & Cloud -->
+    <div class="tech-category">
+      <h3>Virtualization & Cloud</h3>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.vmware.com/content/dam/brand/vmware-splash-screen-logo.svg" alt="VMware" class="tech-img">
+          <p>VMware</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png" alt="AWS" class="tech-img">
+          <p>AWS</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.proxmox.com/images/proxmox/Proxmox-logo-stacked-840px.png" alt="Proxmox" class="tech-img">
+          <p>Proxmox</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Security Tools -->
+    <div class="tech-category">
+      <h3>Security Tools</h3>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.greenbone.net/wp-content/uploads/gb_logo_720.png" alt="OpenVAS" class="tech-img">
+          <p>OpenVAS</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://portswigger.net/burp/favicon-32x32.png" alt="Burp Suite" class="tech-img">
+          <p>Burp Suite</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.fortinet.com/content/dam/fortinet/images/logos/fortinet-logo.svg" alt="Fortigate" class="tech-img">
+          <p>Fortigate</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Automation & DevOps -->
+    <div class="tech-category">
+      <h3>Automation & DevOps</h3>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.ansible.com/hubfs/2016_Images/Assets/Ansible-Mark-Large-RGB-Pool.png" alt="Ansible" class="tech-img">
+          <p>Ansible</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.jenkins.io/images/logo-title-opengraph.png" alt="Jenkins" class="tech-img">
+          <p>Jenkins</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker" class="tech-img">
+          <p>Docker</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://kubernetes.io/images/kubernetes-horizontal-color.png" alt="Kubernetes" class="tech-img">
+          <p>Kubernetes</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Web Servers -->
+    <div class="tech-category">
+      <h3>Web Servers</h3>
+      <p>Apache & Nginx - Web servers</p>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://httpd.apache.org/images/httpd_logo_text_white.png" alt="Apache" class="tech-img">
+          <p>Apache</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.nginx.com/wp-content/uploads/2020/05/NGINX-product-icon.svg" alt="Nginx" class="tech-img">
+          <p>Nginx</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ERP -->
+    <div class="tech-category">
+      <h3>ERP System</h3>
+      <p>Odoo - ERP system</p>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.odoo.com/web/image/website/1/logo/Odoo?unique=97b9a38" alt="Odoo" class="tech-img">
+          <p>Odoo</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Programming Languages -->
+    <div class="tech-category">
+      <h3>Programming Languages</h3>
+      <p>PHP - Programming language</p>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.php.net/images/logos/new-php-logo.svg" alt="PHP" class="tech-img">
+          <p>PHP</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- JavaScript Ecosystem -->
+    <div class="tech-category">
+      <h3>JavaScript Ecosystem</h3>
+      <p>Node.js & npm - JavaScript runtime and package manager</p>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://nodejs.org/static/images/logo.svg" alt="Node.js" class="tech-img">
+          <p>Node.js</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://static.npmjs.com/7a7ffabbd910fc60161bc04f2cee4160.png" alt="npm" class="tech-img">
+          <p>npm</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="tech-img">
+          <p>React</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Databases -->
+    <div class="tech-category">
+      <h3>Databases</h3>
+      <p>MySQL, MariaDB, PostgreSQL - Databases</p>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" alt="MySQL" class="tech-img">
+          <p>MySQL</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://mariadb.com/wp-content/uploads/2019/11/mariadb-logo_blue-transparent-300x75.png" alt="MariaDB" class="tech-img">
+          <p>MariaDB</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL" class="tech-img">
+          <p>PostgreSQL</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Database Tools -->
+    <div class="tech-category">
+      <h3>Database Tools</h3>
+      <div class="tech-container">
+        <div class="tech-item">
+          <img src="https://www.mysql.com/common/logos/mysql-workbench.svg" alt="MySQL Workbench" class="tech-img">
+          <p>MySQL Workbench</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.phpmyadmin.net/static/images/logo.png" alt="phpMyAdmin" class="tech-img">
+          <p>phpMyAdmin</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.pgadmin.org/img/pgadmin4.png" alt="pgAdmin4" class="tech-img">
+          <p>pgAdmin4</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://dbeaver.io/wp-content/uploads/2015/09/beaver-head.png" alt="DBeaver" class="tech-img">
+          <p>DBeaver</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>If you're looking for a skilled Linux and Cloud Administrator, feel free to reach out:</p>
+    <p>Email: <a href="mailto:messi.mani@example.com" class="contact-link">messi.mani@example.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/messimani" class="contact-link" target="_blank">linkedin.com/in/messimani</a></p>
+    <p>GitHub: <a href="https://github.com/messimani" class="contact-link" target="_blank">github.com/messimani</a></p>
+    <p>Phone: <a href="tel:+1234567890" class="contact-link">+1 (234) 567-890</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Messi Mani. All rights reserved.</p>
+    <p>Designed with ❤️ for the open source community</p>
+  </footer>
+
+</body>
+</html>
